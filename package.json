@@ -69,5 +69,15 @@
   "version": "0.0.1",
   "main": "index.js",
   "author": "daggerok",
-  "license": "MIT"
+  "license": "MIT",
+  "description": "stack: - react - redux - react-redux - webpack 2",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daggerok/react-redux-quickstart.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/daggerok/react-redux-quickstart/issues"
+  },
+  "homepage": "https://github.com/daggerok/react-redux-quickstart#readme"
 }

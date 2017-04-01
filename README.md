@@ -1,4 +1,4 @@
-# react-redux-quickstart [![build](https://travis-ci.org/daggerok/angular4.svg?branch=webpack)](https://travis-ci.org/daggerok/angular4)
+# react-redux-quickstart [![build](https://travis-ci.org/daggerok/react-redux-quickstart.svg?branch=react-redux-quickstart)](https://travis-ci.org/daggerok/react-redux-quickstart)
 
 stack:
 - react
