@@ -1,3 +1,5 @@
+import './styles.styl';
+//
 import React from 'react';
 import { render } from 'react-dom';
 //
@@ -29,14 +31,14 @@ const StylingContainer = props => <div style={{
   padding: '2%',
 }} {...props}/>;
 
-const StatefullApp = connect(
+const StatefulApp = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(StatelessApp);
 
 render(
   <Provider store={store}>
-    <StatefullApp />
+    <StatefulApp />
   </Provider>,
   document.querySelector('#app')
 );

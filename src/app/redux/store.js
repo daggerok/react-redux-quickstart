@@ -15,6 +15,6 @@ export const add = value =>
 
 // testing:
 store.subscribe(() => {
-  if (!DEVELOPMENT) return;
+  if (!process.env.NODE_ENV || 'development' === process.env.NODE_ENV) return;
   console.log('debug store:', JSON.stringify(store.getState()));
 });
