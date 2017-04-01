@@ -1,13 +1,11 @@
-# react-router4-redux-quickstart [![build](https://travis-ci.org/daggerok/react-redux-quickstart.svg?branch=react-router4-redux-quickstart)](https://travis-ci.org/daggerok/react-redux-quickstart)
-
-**not finidhed**
+# react-router-primereact-quickstart [![build](https://travis-ci.org/daggerok/react-redux-quickstart.svg?branch=react-router-primereact-quickstart)](https://travis-ci.org/daggerok/react-redux-quickstart)
 
 stack:
-- react
-- redux
-- react-redux
-- react-router-dom (react router 4)
-- webpack 2
+- [react](https://facebook.github.io/react/)
+- [primereact](https://www.primefaces.org/primereact)
+- [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start)
+- [react router 4](http://frontend.turing.io/lessons/react-router-4.html)
+- [webpack 2](https://webpack.js.org/)
 
 develop
 

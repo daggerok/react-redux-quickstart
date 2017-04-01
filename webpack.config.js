@@ -2,6 +2,7 @@ const { join } = require('path');
 const pathTo = rel => join(process.cwd(), rel);
 
 const { version } = require('./package.json');
+const assets = /\.(woff2?|eot|ttf|svg|ico|jpe?g|png|gif|raw)$/i;
 
 const styleLoaders = [
   'style-loader',
@@ -54,6 +55,7 @@ module.exports = env => ({
 
   module: {
     rules: [
+      // scripts
       {
         test: /\.jsx?$/i,
         loader: 'babel-loader',
@@ -82,7 +84,7 @@ module.exports = env => ({
           ]
         },
       },
-      //
+      // styles
       {
         test: /\.css$/i,
         use: styleLoaders,
@@ -94,13 +96,44 @@ module.exports = env => ({
           'stylus-loader',
         ],
       },
-      //
+      // project assets
       {
-        test: /\.(woff2?|eot|ttf|svg|ico|jpe?g|png|gif|raw)$/i,
+        test: assets,
+        include: pathTo('./src'),
         use: {
           loader: 'url-loader',
           options: {
             limit: 1,
+            name: 'resources/[1]?v=' + version,
+            regExp: /\/src\/(.*)/,
+          },
+        },
+      },
+      // vendors
+      {
+        test: assets,
+        include: /\/node_modules\//i,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: 'vendors/[1]?v=' + version,
+            regExp: /\/node_modules\/(.*)/,
+          },
+        },
+      },
+      // all other
+      {
+        test: assets,
+        exclude:[
+          pathTo('./src'),
+          /\/node_modules\//i,
+        ],
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: 'resources/[path][name].[ext]?v=' + version,
           },
         },
       },
@@ -160,5 +193,10 @@ module.exports = env => ({
     }),
 
   ].filter(p => !!p),
+
+  devServer: {
+    port: 8000,
+    historyApiFallback: true,
+  },
 
 });
