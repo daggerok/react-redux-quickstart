@@ -15,6 +15,6 @@ const vendors = [
   connect
 ];
 
-if (DEVELOPEMNT) {
+if ('development' === process.env.NODE_ENV) {
   console.log('import vendors', vendors);
 }
