@@ -1,12 +1,16 @@
 /* application store */
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import createHistory from 'history/createBrowserHistory';
+import { routerMiddleware } from 'react-router-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
+//
+const history = createHistory();
+const middleware = routerMiddleware(history);
+
 import { reducers } from './reducers';
-
-const devtools =
-  window.__REDUX_DEVTOOLS_EXTENSION__
-  && window.__REDUX_DEVTOOLS_EXTENSION__();
-
-export const store = createStore(reducers, devtools);
+export const store = createStore(reducers, composeWithDevTools(
+  applyMiddleware(middleware),
+));
 
 import * as firstActions from './first/actions';
 /* use these helpers only if you aren'o't use react-redux, ie dispatching actions manually/... */
@@ -15,6 +19,6 @@ export const add = value =>
 
 // testing:
 store.subscribe(() => {
-  if (!DEVELOPMENT) return;
+  if ('development' !== process.env.NODE_ENV) return;
   console.log('debug store:', JSON.stringify(store.getState()));
 });
