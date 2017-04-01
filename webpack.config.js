@@ -2,6 +2,7 @@ const { join } = require('path');
 const pathTo = rel => join(process.cwd(), rel);
 
 const { version } = require('./package.json');
+const assets = /\.(woff2?|eot|ttf|svg|ico|jpe?g|png|gif|raw)$/i;
 
 const styleLoaders = [
   'style-loader',
@@ -11,16 +12,7 @@ const styleLoaders = [
       importLoaders: 1,
     },
   },
-  {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => [
-        require('autoprefixer')([
-          'last 4 versions',
-        ]),
-      ],
-    },
-  },
+  'postcss-loader',
 ];
 
 const isProd = env => 'development' !== env;
@@ -35,9 +27,10 @@ const webpack = require('webpack');
 
 const { optimize } = webpack;
 
-process.traceDeprecation = true
+process.traceDeprecation = true;
 
 module.exports = env => ({
+
   context: pathTo('.'),
 
   entry: {
@@ -50,10 +43,12 @@ module.exports = env => ({
     path: pathTo('./dist'),
     publicPath: publicPath(env),
     filename: '[name].js?v=' + version,
+    chunkFilename: '[name].[id].[hash].js?v=' + version,
   },
 
   module: {
     rules: [
+      // scripts
       {
         test: /\.jsx?$/i,
         loader: 'babel-loader',
@@ -82,7 +77,7 @@ module.exports = env => ({
           ]
         },
       },
-      //
+      // styles
       {
         test: /\.css$/i,
         use: styleLoaders,
@@ -94,13 +89,44 @@ module.exports = env => ({
           'stylus-loader',
         ],
       },
-      //
+      // project assets
       {
-        test: /\.(woff2?|eot|ttf|svg|ico|jpe?g|png|gif|raw)$/i,
+        test: assets,
+        include: pathTo('./src'),
         use: {
           loader: 'url-loader',
           options: {
             limit: 1,
+            name: 'resources/[1]?v=' + version,
+            regExp: /\/src\/(.*)/,
+          },
+        },
+      },
+      // vendors
+      {
+        test: assets,
+        include: /\/node_modules\//i,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: 'vendors/[1]?v=' + version,
+            regExp: /\/node_modules\/(.*)/,
+          },
+        },
+      },
+      // all other
+      {
+        test: assets,
+        exclude: [
+          pathTo('./src'),
+          /\/node_modules\//i,
+        ],
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 1,
+            name: 'resources/[path][name].[ext]?v=' + version,
           },
         },
       },
@@ -118,16 +144,27 @@ module.exports = env => ({
 
   plugins: [
 
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: {
+          plugins: () => [
+            require('autoprefixer')([
+              'last 4 versions',
+            ]),
+          ],
+        },
+      },
+    }),
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(isProd(env) ? 'production' : 'development'),
       },
-      DEVELOPMENT: !isProd(env),
     }),
 
     new webpack.NoEmitOnErrorsPlugin(),
 
-    isProd(env) ? new optimize.AggressiveMergingPlugin(): undefined,
+    isProd(env) ? new optimize.AggressiveMergingPlugin() : undefined,
 
     new optimize.CommonsChunkPlugin({
       names: [
@@ -160,5 +197,10 @@ module.exports = env => ({
     }),
 
   ].filter(p => !!p),
+
+  devServer: {
+    port: 8000,
+    historyApiFallback: true,
+  },
 
 });

@@ -16,6 +16,9 @@ export const reducer = (currentState = 0, action) => {
     case types.ADD:
       return optional(state + payload);
 
+    case types.MUL:
+      return optional(state * payload);
+
     default:
       return state;
   }
