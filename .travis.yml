@@ -1,0 +1,39 @@
+sudo: required
+dist: trusty
+language: node_js
+node_js:
+  - 6
+  - 7
+install: true
+env:
+  DOCKER_COMPOSE_VERSION: 1.11.2
+before_install:
+  # chrome
+  - export CHROME_BIN=/usr/bin/google-chrome
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
+  - sudo apt update
+  - sudo apt install -y libappindicator1 fonts-liberation
+  - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+  - sudo dpkg -i google-chrome*.deb
+  # docker-compose
+  - sudo rm /usr/local/bin/docker-compose
+  - curl -L https://github.com/docker/compose/releases/download/$DOCKER_COMPOSE_VERSION/docker-compose-$(uname -s)-$(uname -m) > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - npm i -g yarn
+script:
+  - yarn install
+  - yarn build
+  - yarn upgrade
+  - yarn install
+  - yarn build
+  - yarn docker-start
+  - yarn docker-stop
+  - yarn compose-start
+  - yarn compose-stop
+after_script:
+  - if [ -f npm-debug.log ]; then cat npm-debug.log; fi
+cache:
+  directories:
+    - node_modules/
