@@ -15,7 +15,7 @@
     "build"
   ],
   "dependencies": {
-    "normalize.css": "^6.0.0",
+    "normalize.css": "6.0.0",
     "react": "15.4.2",
     "react-dom": "15.4.2",
     "react-redux": "5.0.3",
@@ -78,7 +78,7 @@
   "main": "index.js",
   "author": "daggerok",
   "license": "MIT",
-  "description": "stack: - react - redux - react-redux - webpack 2",
+  "description": "react, redux, react-redux, webpack 2",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/daggerok/react-redux-quickstart.git"

@@ -12,16 +12,7 @@ const styleLoaders = [
       importLoaders: 1,
     },
   },
-  {
-    loader: 'postcss-loader',
-    options: {
-      plugins: () => [
-        require('autoprefixer')([
-          'last 4 versions',
-        ]),
-      ],
-    },
-  },
+  'postcss-loader',
 ];
 
 const isProd = env => 'development' !== env;
@@ -36,9 +27,10 @@ const webpack = require('webpack');
 
 const { optimize } = webpack;
 
-process.traceDeprecation = true
+process.traceDeprecation = true;
 
 module.exports = env => ({
+
   context: pathTo('.'),
 
   entry: {
@@ -51,6 +43,7 @@ module.exports = env => ({
     path: pathTo('./dist'),
     publicPath: publicPath(env),
     filename: '[name].js?v=' + version,
+    chunkFilename: '[name].[id].[hash].js?v=' + version,
   },
 
   module: {
@@ -125,7 +118,7 @@ module.exports = env => ({
       // all other
       {
         test: assets,
-        exclude:[
+        exclude: [
           pathTo('./src'),
           /\/node_modules\//i,
         ],
@@ -151,16 +144,27 @@ module.exports = env => ({
 
   plugins: [
 
+    new webpack.LoaderOptionsPlugin({
+      options: {
+        postcss: {
+          plugins: () => [
+            require('autoprefixer')([
+              'last 4 versions',
+            ]),
+          ],
+        },
+      },
+    }),
+
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(isProd(env) ? 'production' : 'development'),
       },
-      DEVELOPMENT: !isProd(env),
     }),
 
     new webpack.NoEmitOnErrorsPlugin(),
 
-    isProd(env) ? new optimize.AggressiveMergingPlugin(): undefined,
+    isProd(env) ? new optimize.AggressiveMergingPlugin() : undefined,
 
     new optimize.CommonsChunkPlugin({
       names: [

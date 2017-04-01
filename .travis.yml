@@ -30,6 +30,8 @@ script:
   - yarn build
   - yarn docker-start
   - yarn docker-stop
+  - yarn compose-start
+  - yarn compose-stop
 after_script:
   - if [ -f npm-debug.log ]; then cat npm-debug.log; fi
 cache:
