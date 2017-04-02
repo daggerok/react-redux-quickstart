@@ -24,6 +24,6 @@ const vendors = [
   AccordionTab,
 ];
 
-if (process.env.NODE_ENV || 'development' === process.env.NODE_ENV) {
+if (!process.env.ENV || 'development' === process.env.ENV) {
   console.log('vendors', vendors);
 }

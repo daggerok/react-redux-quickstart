@@ -2,9 +2,11 @@
 .vscode/
 dist/
 node_modules/
+react-redux-quickstart/
 
 .DS_Store
 yarn.lock
 *.log
+*-e
 
 !*.vscode/settings.json

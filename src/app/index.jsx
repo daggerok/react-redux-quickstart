@@ -18,13 +18,18 @@ const Root = props => <div style={{
   padding: '2%',
 }} {...props}/>;
 
+/* publucPath for gh-pages (workaround using webpack) */
+export const base = !!process.env.ENV
+  && 'ghpages' === process.env.ENV
+  ? '/react-redux-quickstart' : '/';
+
 const App = props => (
-  <Router>
+  <Router basename={base}>
     <Root>
       <NavBar />
       <Switch>
-        <Redirect from='/home' to='/'/>
-        <Route exact path='/' render={Home}/>
+        <Redirect from='/home' to='/' />
+        <Route exact path='/' render={Home} />
         <Route component={NotFound}/>
       </Switch>
     </Root>

@@ -3,8 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 const items = [
   { to: '/home', name: 'Redirect to home' },
-  { to: '/', name: 'Home' },
-  { to: '/404', name: 'Not found' },
+  { to: '/',     name: 'Home' },
+  { to: '/404',  name: 'Not found' },
 ];
 
 export const NavBar = () => <div>
