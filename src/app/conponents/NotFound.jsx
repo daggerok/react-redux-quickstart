@@ -1,7 +1,6 @@
 import React from 'react';
-//
 import { connect } from 'react-redux';
-//
+
 const StatelessNotFound = props => <div>
   <h1>=(</h1>
   <div>

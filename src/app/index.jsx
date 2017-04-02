@@ -8,7 +8,7 @@ import { store } from './redux/store';
 //
 import { StatefulApp } from './conponents/App';
 
-if (process.env.NODE_ENV && 'development' === process.env.NODE_ENV) {
+if (!process.env.ENV || 'development' === process.env.ENV) {
   require('./redux/store.test');
 }
 

@@ -6,7 +6,7 @@ const NavItem = ({ to, name }) => <NavLink style={{
 }} to={to}>{name}</NavLink>;
 
 export const NavBar = props => <div  {...props}>
-  <NavItem to='/' name='Root'/>
+  <NavItem to='/'     name='Root'/>
   <NavItem to='/home' name='Home'/>
-  <NavItem to='/404' name='Not found'/>
+  <NavItem to='/404'  name='Not found'/>
 </div>;

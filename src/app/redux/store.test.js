@@ -2,6 +2,6 @@ import { store } from './store';
 
 // testing:
 store.subscribe(() => {
-  if ('development' !== process.env.NODE_ENV) return;
+  if (process.env.ENV && 'development' !== process.env.ENV) return;
   console.log('debug store:', JSON.stringify(store.getState()));
 });

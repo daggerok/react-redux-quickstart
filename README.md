@@ -16,6 +16,11 @@ yarn install
 yarn build
 yarn serve
 yarn start
+yarn docker-start
+yarn docker-stop
+yarn compose-start
+yarn compose-stop
+fish bin/ghpages.fish
 ```
 
 update

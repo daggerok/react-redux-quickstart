@@ -1,4 +1,4 @@
-/* use these helpers only if you aren'o't use react-redux, ie dispatching actions manually/... */
+/* use these helpers only if you aren't using react-redux, ie dispatching actions manually... */
 import { store } from './store';
 import * as firstActions from './first/actions';
 

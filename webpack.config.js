@@ -16,7 +16,7 @@ const styleLoaders = [
 ];
 
 const isProd = env => 'development' !== env;
-const publicPath = env => 'ghpages' === env ? '/react-redux-playground/' : '/';
+const publicPath = env => 'ghpages' === env ? '/react-redux-quickstart/' : '/';
 
 const CompressionWebpackPlugin = require('compression-webpack-plugin');
 const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
@@ -159,6 +159,7 @@ module.exports = env => ({
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(isProd(env) ? 'production' : 'development'),
+        ENV: JSON.stringify(env),
       },
     }),
 

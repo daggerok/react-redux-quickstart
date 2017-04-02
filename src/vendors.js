@@ -21,6 +21,6 @@ const vendors = [
   NavLink
 ];
 
-if ('development' === process.env.NODE_ENV) {
-  console.log('import vendors', vendors);
+if (!process.env.ENV || 'development' === process.env.ENV) {
+  console.log('vendors', vendors);
 }
