@@ -74,7 +74,10 @@ module.exports = env => ({
             'es2015-node5',
             'stage-0',
             'react'
-          ]
+          ],
+          plugins: [
+            'transform-decorators-legacy'
+          ],
         },
       },
       // styles
