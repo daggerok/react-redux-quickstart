@@ -1,2 +1,1 @@
-import './styles.styl';
-import './app/Main';
+import './app';

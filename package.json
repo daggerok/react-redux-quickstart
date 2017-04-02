@@ -17,7 +17,7 @@
   "dependencies": {
     "classnames": "2.2.5",
     "font-awesome": "4.7.0",
-    "normalize.css": "^6.0.0",
+    "normalize.css": "6.0.0",
     "primereact": "1.0.0-alpha.1",
     "react": "15.4.2",
     "react-dom": "15.4.2",

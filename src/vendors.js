@@ -1,7 +1,7 @@
-import 'normalize.css/normalize.css';
-import 'primereact/resources/primeng.min.css';
-import 'primereact/resources/themes/omega/theme.css';
-import 'font-awesome/css/font-awesome.css';
+// import 'normalize.css/normalize.css';
+// import 'primereact/resources/primeng.min.css';
+// import 'primereact/resources/themes/omega/theme.css';
+// import 'font-awesome/css/font-awesome.css';
 
 import React, { Component } from 'react';
 import { render } from 'react-dom';
@@ -24,6 +24,6 @@ const vendors = [
   AccordionTab,
 ];
 
-if ('development' === process.env.NODE_ENV) {
-  console.log('import vendors', vendors);
+if (process.env.NODE_ENV || 'development' === process.env.NODE_ENV) {
+  console.log('vendors', vendors);
 }
