@@ -1,4 +1,4 @@
-import 'normalize.css/normalize.css';
+// import 'normalize.css/normalize.css';
 
 import React, { Component } from 'react';
 import { render } from 'react-dom';
@@ -15,6 +15,6 @@ const vendors = [
   connect
 ];
 
-if (process.env.NODE_ENV || 'development' === process.env.NODE_ENV) {
+if (!process.env.ENV || 'development' === process.env.ENV) {
   console.log('vendors', vendors);
 }
