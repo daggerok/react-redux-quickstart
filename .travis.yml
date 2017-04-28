@@ -3,7 +3,6 @@ dist: trusty
 language: node_js
 node_js:
   - 6
-  - 7
 install: true
 env:
   DOCKER_COMPOSE_VERSION: 1.12.0
@@ -23,9 +22,6 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   - npm i -g yarn
 script:
-  - yarn install
-  - yarn build
-  - yarn upgrade
   - yarn install
   - yarn build
   - yarn docker-start
